@@ -1,0 +1,12 @@
+# Formát: nazevMistnosti;popis;sever;jih;vychod;zapad;nahoru;dolu
+# Pokud v daném směru nelze jít, použijte "-" nebo nechte prázdné
+# sever;jih;vychod;zapad;nahoru;dolu
+
+HLAVNI_ARCHIV;Centrální místnost knihovny s prázdným podstavcem, na který patří Kniha Prvního Kouzla.;VEZ;SKLEPENI;VYCHODNI_KRIDLO;ZAPADNI_KRIDLO;-;-
+STUDOVNA;Prostorná místnost plná stolů s rozpadajícími se knihami. Mezi knihami je ukrytý Svitek pravdy.;-;-;-;HLAVNI_ARCHIV;-;-
+VYCHODNI_KRIDLO;Část knihovny s magickými artefakty. Na stěně visí tajemné Magické zrcadlo.;-;-;-;HLAVNI_ARCHIV;-;-
+ZAPADNI_KRIDLO;Alchymistická laboratoř s mnoha lektvary a ingrediencemi. Stojí zde alchymistický stůl.;-;-;HLAVNI_ARCHIV;-;-;-
+SKLEPENI;Staré skladiště plné prachu a pavučin. Je tu tma a bez Magické svíce nic neuvidíš.;HLAVNI_ARCHIV;TAJNA_CHODBA;-;-;-;-
+VEZ;Astronomická observatoř s výhledem na noční oblohu. Uprostřed místnosti stojí astronomický dalekohled.;-;HLAVNI_ARCHIV;-;-;-;-
+TAJNA_CHODBA;Skrytá chodba, která se objeví po vyřešení hádanky. Vede k mágově skrýši.;SKLEPENI;MAGOVA_SKRYS;-;-;-;-
+MAGOVA_SKRYS;Temná místnost plná čarodějných předmětů. Zde je ukryta Kniha Prvního Kouzla.;TAJNA_CHODBA;-;-;-;-;-
