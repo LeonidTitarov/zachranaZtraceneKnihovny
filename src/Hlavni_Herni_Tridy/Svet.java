@@ -1,3 +1,5 @@
+package Hlavni_Herni_Tridy;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +11,8 @@ import java.util.*;
  */
 
 public class Svet {
-    private Map<String, Mistnost> mistnosti;
-    private Mistnost aktualniMistnost;
+    private Map<String, Hlavni_Herni_Tridy.Mistnost> mistnosti;
+    private Hlavni_Herni_Tridy.Mistnost aktualniMistnost;
 
     public Svet() {
         mistnosti = new HashMap<>();
@@ -39,7 +41,7 @@ public class Svet {
                     String popis = casti[1].trim();
 
                     // Vytvoříme místnost, pokud ještě neexistuje
-                    Mistnost mistnost = mistnosti.getOrDefault(nazev, new Mistnost(nazev, popis));
+                    Hlavni_Herni_Tridy.Mistnost mistnost = mistnosti.getOrDefault(nazev, new Hlavni_Herni_Tridy.Mistnost(nazev, popis));
                     mistnosti.put(nazev, mistnost);
 
                     // Nastavíme výchozí místnost, pokud ještě nebyla nastavena
@@ -54,8 +56,8 @@ public class Svet {
                         if (!sousedNazev.isEmpty() && !sousedNazev.equals("-")) {
                             // Vytvoříme sousední místnost, pokud ještě neexistuje
                             // (doplníme popis později)
-                            Mistnost soused = mistnosti.getOrDefault(sousedNazev,
-                                    new Mistnost(sousedNazev, ""));
+                            Hlavni_Herni_Tridy.Mistnost soused = mistnosti.getOrDefault(sousedNazev,
+                                    new Hlavni_Herni_Tridy.Mistnost(sousedNazev, ""));
                             mistnosti.put(sousedNazev, soused);
                             mistnost.pridejVychod(smery[i], soused);
                         }
@@ -74,12 +76,12 @@ public class Svet {
      * @param smer Směr, kterým se chceme přesunout
      * @return Nová místnost nebo null, pokud se přesun nezdařil
      */
-    public Mistnost jdiSmerem(String smer) {
+    public Hlavni_Herni_Tridy.Mistnost jdiSmerem(String smer) {
         if (aktualniMistnost == null) {
             return null;
         }
 
-        Mistnost novaMistnost = aktualniMistnost.vratSousedniMistnost(smer);
+        Hlavni_Herni_Tridy.Mistnost novaMistnost = aktualniMistnost.vratSousedniMistnost(smer);
         if (novaMistnost != null) {
             aktualniMistnost = novaMistnost;
         }
@@ -90,7 +92,7 @@ public class Svet {
      * Vrátí aktuální místnost.
      * @return Aktuální místnost
      */
-    public Mistnost getAktualniMistnost() {
+    public Hlavni_Herni_Tridy.Mistnost getAktualniMistnost() {
         return aktualniMistnost;
     }
 
@@ -112,7 +114,7 @@ public class Svet {
      * @param nazev Název místnosti
      * @return Místnost nebo null, pokud místnost neexistuje
      */
-    public Mistnost getMistnost(String nazev) {
+    public Hlavni_Herni_Tridy.Mistnost getMistnost(String nazev) {
         return mistnosti.get(nazev);
     }
 
@@ -125,94 +127,3 @@ public class Svet {
     }
 }
 
-/**
- * Třída reprezentující jednu místnost/lokaci ve světě hry.
- */
-class Mistnost {
-    private String nazev;
-    private String popis;
-    private Map<String, Mistnost> vychody;
-
-    /**
-     * Konstruktor místnosti.
-     * @param nazev Jedinečný název místnosti
-     * @param popis Textový popis místnosti
-     */
-    public Mistnost(String nazev, String popis) {
-        this.nazev = nazev;
-        this.popis = popis;
-        this.vychody = new HashMap<>();
-    }
-
-    /**
-     * Přidání východu/sousední místnosti.
-     * @param smer Směr, kterým se lze dostat do sousední místnosti
-     * @param sousedniMistnost Sousední místnost
-     */
-    public void pridejVychod(String smer, Mistnost sousedniMistnost) {
-        vychody.put(smer.toLowerCase(), sousedniMistnost);
-    }
-
-    /**
-     * Získání sousední místnosti v zadaném směru.
-     * @param smer Směr, kterým se chceme vydat
-     * @return Sousední místnost nebo null, pokud v daném směru žádná místnost není
-     */
-    public Mistnost vratSousedniMistnost(String smer) {
-        return vychody.get(smer.toLowerCase());
-    }
-
-    /**
-     * Vrátí název místnosti.
-     * @return Název místnosti
-     */
-    public String getNazev() {
-        return nazev;
-    }
-
-    /**
-     * Vrátí popis místnosti.
-     * @return Popis místnosti
-     */
-    public String getPopis() {
-        return popis;
-    }
-
-    /**
-     * Nastaví popis místnosti.
-     * @param popis Nový popis místnosti
-     */
-    public void setPopis(String popis) {
-        this.popis = popis;
-    }
-
-    /**
-     * Vrátí seznam všech východů z místnosti.
-     * @return Mapa směr -> místnost
-     */
-    public Map<String, Mistnost> getVychody() {
-        return new HashMap<>(vychody);
-    }
-
-    /**
-     * Vrátí textový seznam směrů, kudy lze odejít.
-     * @return Textový seznam směrů
-     */
-
-    public String seznamVychodu() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Východy: ");
-
-        if (vychody.isEmpty()) {
-            sb.append("žádné");
-        } else {
-            for (String smer : vychody.keySet()) {
-                sb.append(smer).append(" ");
-            }
-        }
-
-
-
-        return sb.toString();
-    }
-}

@@ -1,3 +1,4 @@
+package Hlavni_Herni_Tridy;
 
 public class TestSveta {
     public static void main(String[] args) {
@@ -15,28 +16,23 @@ public class TestSveta {
         System.out.println("Počet místností: " + svet.getPocetMistnosti());
         System.out.println();
 
-        // Nastavení výchozí místnosti
-        svet.nastavAktualniMistnost("HLAVNI_ARCHIV");
 
-        // Zobrazení informací o aktuální místnosti
+        svet.nastavAktualniMistnost("VEZ");
+
         zobrazInformaceOMistnosti(svet.getAktualniMistnost());
 
-        // Zkusíme se přesunout do jiné místnosti
         System.out.println("\nPřesouvám se na východ...");
         Mistnost novaMistnost = svet.jdiSmerem("vychod");
         zobrazInformaceOMistnosti(novaMistnost);
 
-        // Zkusíme se přesunout do neexistující místnosti
         System.out.println("\nPřesouvám se na sever...");
         novaMistnost = svet.jdiSmerem("sever");
         zobrazInformaceOMistnosti(novaMistnost);
 
-        // Vrátíme se zpět
         System.out.println("\nPřesouvám se na zapad...");
         novaMistnost = svet.jdiSmerem("zapad");
         zobrazInformaceOMistnosti(novaMistnost);
 
-        // Zkusíme jít dolů do sklepení
         System.out.println("\nPřesouvám se na jih...");
         novaMistnost = svet.jdiSmerem("jih");
         zobrazInformaceOMistnosti(novaMistnost);
