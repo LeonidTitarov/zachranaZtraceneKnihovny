@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Třída reprezentující jednu místnost/lokaci ve světě hry.
  */
-class Mistnost {
+public class Mistnost {
     private String nazev;
     private String popis;
     private Map<String, Mistnost> vychody;
