@@ -54,4 +54,15 @@ public class NPC extends Postava {
     public void setPopis(String popis) {
         this.popis = popis;
     }
+
+    public boolean getUvodni_dialog() {
+        // tady mi to chybi dodelat
+    }
+
+    public void zobrazMoznostiDialogu() {
+    }
+
+    public String zpracujOdpoved(int cisloVolby) {
+        return null;
+    }
 }
