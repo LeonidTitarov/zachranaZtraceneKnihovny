@@ -67,7 +67,7 @@ public class Hra {
         }
 
         // Přidání předmětů podle Game Designu
-        // TODO: Zde by mělo být přidání konkrétních předmětů - doplňte podle vašich tříd
+
     }
 
     private void pridejNpcDoMistnosti() {
@@ -78,7 +78,7 @@ public class Hra {
         }
 
         // Přidání NPC podle Game Designu
-        // TODO: Zde by mělo být přidání konkrétních NPC - doplňte podle vašich tříd
+
     }
 
     public void spustenHry() {
