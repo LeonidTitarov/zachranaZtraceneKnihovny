@@ -55,8 +55,10 @@ public class NPC extends Postava {
         this.popis = popis;
     }
 
+    // TADY JSEM UDELAL NEJAKOU ZMENU VUBEC NEVIM JETSLU JE TO SPRAVNE PRED TIM TAM NIC NEBYLO
     public boolean getUvodni_dialog() {
-        // tady mi to chybi dodelat
+        return true;
+
     }
 
     public void zobrazMoznostiDialogu() {

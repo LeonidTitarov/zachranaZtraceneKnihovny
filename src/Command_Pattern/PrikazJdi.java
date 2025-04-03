@@ -13,22 +13,21 @@ public class PrikazJdi implements Prikaz {
 
     @Override
     public boolean proved(String[] parametry) {
-        if (parametry.length == 0) {
+        if (parametry.length < 2) {
             System.out.println("Kam mám jít? Musíš zadat směr.");
             return true;
         }
 
-        String smer = parametry[0];
-        Mistnost novaMistnost = hra.getSvet().jdiSmerem(smer);
+        Mistnost novaMistnost = hra.getSvet().jdiSmerem(parametry[1]);
 
-        if (novaMistnost == hra.getSvet().getAktualniMistnost()) {
-            System.out.println("Tímto směrem nemůžeš jít!");
-        } else {
+        //if (novaMistnost == hra.getSvet().getAktualniMistnost()) {
+         //   System.out.println("Tímto směrem nemůžeš jít!");
+        //} else {
             hra.getCasovySystem().odpocetTahu();
             System.out.println("Přesunul(a) jsi se do: " + novaMistnost.getNazev());
             System.out.println(novaMistnost.getPopis());
             System.out.println(novaMistnost.seznamVychodu());
-        }
+       // }
 
         return true;
     }

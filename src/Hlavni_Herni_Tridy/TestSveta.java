@@ -17,7 +17,7 @@
             System.out.println();
 
 
-            svet.nastavAktualniMistnost("VEZ");
+            svet.nastavAktualniMistnost("STUDOVNA");
 
             zobrazInformaceOMistnosti(svet.getAktualniMistnost());
 

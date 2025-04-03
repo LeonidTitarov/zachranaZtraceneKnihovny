@@ -111,23 +111,20 @@ public class Hra {
     }
 
     public void provedPrikaz(String radek) {
-        String[] slova = radek.split("\\s+");
+        String[] slova = radek.split(" ");
         if (slova.length == 0) {
             return;
         }
+        System.out.println(slova.length + " delka");
 
         String prikaz = slova[0].toLowerCase();
-        String[] parametry = new String[slova.length - 1];
-        System.arraycopy(slova, 1, parametry, 0, slova.length - 1);
-
         Prikaz vykonnyPrikaz = seznamPrikazu.najdiPrikaz(prikaz);
 
         if (vykonnyPrikaz == null) {
             System.out.println("Neznámý příkaz. Pro nápovědu zadej 'napoveda'.");
             return;
         }
-
-        konecHry = !vykonnyPrikaz.proved(parametry);
+        konecHry = !vykonnyPrikaz.proved(slova);
     }
 
     public void ukonciHru() {

@@ -11,10 +11,6 @@ public class PrikazKonec implements Prikaz {
 
     @Override
     public boolean proved(String[] parametry) {
-        if (parametry.length > 0) {
-            System.out.println("Konec co? Nechápu, co mám ukončit.");
-            return true;
-        }
 
         System.out.println("Děkuji za hru. Ahoj!");
         return false;  // signál pro ukončení hry

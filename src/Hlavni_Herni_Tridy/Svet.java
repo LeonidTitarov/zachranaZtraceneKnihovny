@@ -11,8 +11,8 @@ import java.util.*;
  */
 
 public class Svet {
-    private Map<String, Hlavni_Herni_Tridy.Mistnost> mistnosti;
-    private Hlavni_Herni_Tridy.Mistnost aktualniMistnost;
+    private Map<String, Mistnost> mistnosti;
+    private Mistnost aktualniMistnost;
 
     public Svet() {
         mistnosti = new HashMap<>();
@@ -41,7 +41,7 @@ public class Svet {
                     String popis = casti[1].trim();
 
                     // Vytvoříme místnost, pokud ještě neexistuje
-                    Hlavni_Herni_Tridy.Mistnost mistnost = mistnosti.getOrDefault(nazev, new Hlavni_Herni_Tridy.Mistnost(nazev, popis));
+                    Mistnost mistnost = mistnosti.getOrDefault(nazev, new Mistnost(nazev, popis));
                     mistnosti.put(nazev, mistnost);
 
                     // Nastavíme výchozí místnost, pokud ještě nebyla nastavena
@@ -50,14 +50,14 @@ public class Svet {
                     }
 
                     // Projdeme všechny směry
-                    String[] smery = {"sever", "jih", "vychod", "zapad", "nahoru", "dolu"};
-                    for (int i = 0; i < 6; i++) {
+                    String[] smery = {"sever", "jih", "vychod", "zapad"};
+                    for (int i = 0; i < 4; i++) {
                         String sousedNazev = casti[i + 2].trim();
                         if (!sousedNazev.isEmpty() && !sousedNazev.equals("-")) {
                             // Vytvoříme sousední místnost, pokud ještě neexistuje
                             // (doplníme popis později)
-                            Hlavni_Herni_Tridy.Mistnost soused = mistnosti.getOrDefault(sousedNazev,
-                                    new Hlavni_Herni_Tridy.Mistnost(sousedNazev, ""));
+                            Mistnost soused = mistnosti.getOrDefault(sousedNazev,
+                                    new Mistnost(sousedNazev, ""));
                             mistnosti.put(sousedNazev, soused);
                             mistnost.pridejVychod(smery[i], soused);
                         }
@@ -76,12 +76,12 @@ public class Svet {
      * @param smer Směr, kterým se chceme přesunout
      * @return Nová místnost nebo null, pokud se přesun nezdařil
      */
-    public Hlavni_Herni_Tridy.Mistnost jdiSmerem(String smer) {
+    public Mistnost jdiSmerem(String smer) {
         if (aktualniMistnost == null) {
             return null;
         }
 
-        Hlavni_Herni_Tridy.Mistnost novaMistnost = aktualniMistnost.vratSousedniMistnost(smer);
+        Mistnost novaMistnost = aktualniMistnost.vratSousedniMistnost(smer);
         if (novaMistnost != null) {
             aktualniMistnost = novaMistnost;
         }
@@ -92,7 +92,7 @@ public class Svet {
      * Vrátí aktuální místnost.
      * @return Aktuální místnost
      */
-    public Hlavni_Herni_Tridy.Mistnost getAktualniMistnost() {
+    public Mistnost getAktualniMistnost() {
         return aktualniMistnost;
     }
 
@@ -114,7 +114,7 @@ public class Svet {
      * @param nazev Název místnosti
      * @return Místnost nebo null, pokud místnost neexistuje
      */
-    public Hlavni_Herni_Tridy.Mistnost getMistnost(String nazev) {
+    public Mistnost getMistnost(String nazev) {
         return mistnosti.get(nazev);
     }
 

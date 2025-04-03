@@ -31,10 +31,6 @@ public class NapovedaSystem {
         tipy.add("Svitky pravdy odhalují skryté věci v místnostech.");
     }
 
-    /**
-     * Zobrazení nápovědy
-     * @return Text nápovědy
-     */
     public String zobrazNapovedu() {
         StringBuilder sb = new StringBuilder();
         sb.append("=== NÁPOVĚDA ===\n");
@@ -46,10 +42,6 @@ public class NapovedaSystem {
         return sb.toString();
     }
 
-    /**
-     * Poskytnutí náhodného tipu
-     * @return Náhodný tip
-     */
     public String poskytniTip() {
         if (tipy.isEmpty()) {
             return "Nemám pro tebe žádné další tipy.";
@@ -59,18 +51,10 @@ public class NapovedaSystem {
         return "TIP: " + tipy.get(index);
     }
 
-    /**
-     * Přidání nové nápovědy
-     * @param napoveda Text nápovědy
-     */
     public void pridejNapovedu(String napoveda) {
         napovedy.add(napoveda);
     }
 
-    /**
-     * Přidání nového tipu
-     * @param tip Text tipu
-     */
     public void pridejTip(String tip) {
         tipy.add(tip);
     }

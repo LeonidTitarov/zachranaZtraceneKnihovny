@@ -19,11 +19,7 @@ public class Hrac {
         this.hra = hra;
     }
 
-    /**
-     * Pohyb hráče v určeném směru
-     * @param smer Směr pohybu (sever, jih, vychod, zapad, nahoru, dolu)
-     * @return Informace o výsledku pohybu
-     */
+
     public String pohyb(String smer) {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
         Mistnost novaMistnost = svet.jdiSmerem(smer);

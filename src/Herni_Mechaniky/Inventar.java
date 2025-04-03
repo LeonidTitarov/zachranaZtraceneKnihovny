@@ -30,10 +30,11 @@ public class Inventar {
         return najdiPredmet(nazevPredmetu) != null;
     }
 
-    public void zobrazInventar() {
+    // tady jsem to zmenil SAMMM na String
+    public String zobrazInventar() {
         if (predmety.isEmpty()) {
             System.out.println("Tvůj inventář je prázdný.");
-            return;
+            return null;
         }
 
         System.out.println("Obsah inventáře:");
@@ -41,6 +42,7 @@ public class Inventar {
             System.out.println("- " + predmet.getNazev());
         }
         System.out.println("Celkem předmětů: " + predmety.size() + "/" + MAX_KAPACITA);
+        return null;
     }
 
     public prenosnyPredmet najdiPredmet(String nazevPredmetu) {

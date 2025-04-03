@@ -11,10 +11,6 @@ public class DialogSystem {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Zahájení dialogu s NPC
-     * @param postava NPC, se kterou má být dialog zahájen
-     */
     public void zahajDialog(NPC postava) {
         if (postava == null) {
             System.out.println("Tato postava neexistuje.");
@@ -28,9 +24,6 @@ public class DialogSystem {
         vyberMoznosti();
     }
 
-    /**
-     * Výběr možností dialogu
-     */
     public void vyberMoznosti() {
         if (aktivniNPC == null) {
             return;
@@ -92,9 +85,6 @@ public class DialogSystem {
         }
     }
 
-    /**
-     * Ukončení dialogu
-     */
     public void ukonciDialog() {
         if (aktivniNPC != null) {
             System.out.println("Ukončil(a) jsi dialog s postavou " + aktivniNPC.getJmeno() + ".");
@@ -102,18 +92,11 @@ public class DialogSystem {
         }
     }
 
-    /**
-     * Kontrola, zda probíhá dialog
-     * @return true pokud probíhá dialog, jinak false
-     */
+
     public boolean probihaDalog() {
         return aktivniNPC != null;
     }
 
-    /**
-     * Získání aktivní NPC
-     * @return Aktivní NPC nebo null
-     */
     public NPC getAktivniNPC() {
         return aktivniNPC;
     }
