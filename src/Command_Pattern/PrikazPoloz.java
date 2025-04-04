@@ -30,6 +30,7 @@ public class PrikazPoloz implements Prikaz {
         System.out.println("Položil(a) jsi: " + predmet.getNazev());
 
         // Speciální případ pro vrácení knihy na podstavec
+        // pokud se hra dohraje na konci se vypise vyhodnot hru
         if (nazevPredmetu.equalsIgnoreCase("kniha") &&
                 hra.getSvet().getAktualniMistnost().getNazev().equals("HLAVNI_ARCHIV")) {
             hra.vyhodnotHru();

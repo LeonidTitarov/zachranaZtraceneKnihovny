@@ -24,6 +24,7 @@ public class CasovySystem {
      */
     public void odpocetTahu() {
         zbyvajiciTahy--;
+        // po kazdem tahu se to logicky bude odecitat
 
         if (zbyvajiciTahy <= 0) {
             casVyprsel = true;

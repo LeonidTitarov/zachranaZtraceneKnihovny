@@ -1,4 +1,4 @@
-package Hlavni_Herni_Tridy;
+package  Hlavni_Herni_Tridy;
 
 import Command_Pattern.Prikaz;
 import Command_Pattern.SeznamPrikazu;
@@ -6,15 +6,16 @@ import Herni_Mechaniky.CasovySystem;
 import Herni_Mechaniky.DialogSystem;
 import Herni_Mechaniky.Inventar;
 import Herni_Mechaniky.NapovedaSystem;
+import Postava_a_NPC.Duch;
+import Postava_a_NPC.Golem;
+import Postava_a_NPC.Knihovnice;
 import Postava_a_NPC.NPC;
+import Predmety.MagickaSvice;
 import Predmety.Predmet;
+import Predmety.SvitkyPravdy;
 import Predmety.prenosnyPredmet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Hra {
     private Svet svet;
@@ -60,26 +61,160 @@ public class Hra {
     }
 
     private void pridejPredmetyDoMistnosti() {
-        // Pro každou místnost vytvoříme list předmětů
+
         for (String nazevMistnosti : new String[]{"HLAVNI_ARCHIV", "STUDOVNA", "VYCHODNI_KRIDLO",
                 "ZAPADNI_KRIDLO", "SKLEPENI", "VEZ", "MAGOVA_SKRYS"}) {
             predmetyVMistnostech.put(nazevMistnosti, new ArrayList<>());
         }
 
-        // Přidání předmětů podle Game Designu
+        MagickaSvice magickaSvice = new MagickaSvice();
+        predmetyVMistnostech.get("ZAPADNI_KRIDLO").add(magickaSvice);
+
+
+        SvitkyPravdy svitekPravdy = new SvitkyPravdy();
+        predmetyVMistnostech.get("STUDOVNA").add(svitekPravdy);
+
+        prenosnyPredmet knihaPrvnihoKouzla = new prenosnyPredmet("Kniha Prvního Kouzla",
+                "Starodávná kniha vázaná v kůži s zlatými runovými symboly. Vyzařuje z ní mocná magická energie.");
+        predmetyVMistnostech.get("MAGOVA_SKRYS").add(knihaPrvnihoKouzla);
+
+
+        Predmet podstavec = new Predmet("Podstavec",
+                "Kamenný podstavec s prohlubní ve tvaru knihy. Je určený pro Knihu Prvního Kouzla.") {
+            @Override
+            public String getNazev() {
+                return nazev;
+            }
+
+            @Override
+            public String getPopis() {
+                return popis;
+            }
+        };
+        predmetyVMistnostech.get("HLAVNI_ARCHIV").add(podstavec);
+
+        // Magické zrcadlo ve Východním křídle
+        Predmet magickeZrcadlo = new Predmet("Magické zrcadlo",
+                "Velké zrcadlo v ozdobném rámu. Když se do něj podíváš, vidíš více než jen svůj odraz.") {
+            @Override
+            public String getNazev() {
+                return nazev;
+            }
+
+            @Override
+            public String getPopis() {
+                return popis;
+            }
+        };
+        predmetyVMistnostech.get("VYCHODNI_KRIDLO").add(magickeZrcadlo);
+
+        // Alchymistický stůl v Západním křídle
+        Predmet alchymistickyStul = new Predmet("Alchymistický stůl",
+                "Stůl plný různých lahviček, kádinky, hmoždíře a dalších alchymistických pomůcek.") {
+            @Override
+            public String getNazev() {
+                return nazev;
+            }
+
+            @Override
+            public String getPopis() {
+                return popis;
+            }
+        };
+        predmetyVMistnostech.get("ZAPADNI_KRIDLO").add(alchymistickyStul);
+
+        // Astronomický dalekohled ve věži
+        Predmet astronomickyDalekohled = new Predmet("Astronomický dalekohled",
+                "Velký dalekohled namířený k obloze. Vypadá, že jej lze nastavit podle hvězd.") {
+            @Override
+            public String getNazev() {
+                return nazev;
+            }
+
+            @Override
+            public String getPopis() {
+                return popis;
+            }
+        };
+        predmetyVMistnostech.get("VEZ").add(astronomickyDalekohled);
+
+        prenosnyPredmet lektvarNeviditelnosti = new prenosnyPredmet("Lektvar neviditelnosti",
+                "Průhledná tekutina v malé lahvičce. Po vypití tě učiní dočasně neviditelným.");
 
     }
 
+
+
+
+
     private void pridejNpcDoMistnosti() {
-        // Pro každou místnost vytvoříme list postav
+
         for (String nazevMistnosti : new String[]{"HLAVNI_ARCHIV", "STUDOVNA", "VYCHODNI_KRIDLO",
                 "ZAPADNI_KRIDLO", "SKLEPENI", "VEZ", "MAGOVA_SKRYS"}) {
             npcVMistnostech.put(nazevMistnosti, new ArrayList<>());
         }
 
-        // Přidání NPC podle Game Designu
+        Knihovnice knihovniceHelena = new Knihovnice();
+        npcVMistnostech.get("HLAVNI_ARCHIV").add(knihovniceHelena);
 
+        Duch duchStarehoArchivare = new Duch();
+        npcVMistnostech.get("STUDOVNA").add(duchStarehoArchivare);
+
+
+        Golem golemStrazce = new Golem();
+        npcVMistnostech.get("VYCHODNI_KRIDLO").add(golemStrazce);
+
+        // Mágovi pomocníci (havrani) v Mágově skrýši
+        NPC havran1 = new NPC("Havran", "Velký černý pták s inteligentním pohledem.") {
+            @Override
+            public void zahajDialog() {
+                System.out.println("Krááá! Co tu děláš, vetřelče?");
+            }
+
+            @Override
+            public void dejNapovedu() {
+                System.out.println("Havran krákavě říká: \"Pán má rád hádanky. Možná by ses mohl proklouznout, kdybys byl neviditelný.\"");
+            }
+        };
+        havran1.pridejDialog("Krááá! Nejsi vítán v pánově doupěti!");
+
+        NPC havran2 = new NPC("Havran", "Další z velkých černých ptáků, který tě bedlivě sleduje.") {
+            @Override
+            public void zahajDialog() {
+                System.out.println("*Pátravě tě sleduje* Proč jsi přišel?");
+            }
+
+            @Override
+            public void dejNapovedu() {
+                System.out.println("Havran tiše říká: \"Pán ukryl knihu přímo ve svém pracovním stole. Ale je magicky chráněna.\"");
+            }
+        };
+        havran2.pridejDialog("Hlídáme pánovy poklady před zloději jako jsi ty!");
+
+        npcVMistnostech.get("MAGOVA_SKRYS").add(havran1);
+        npcVMistnostech.get("MAGOVA_SKRYS").add(havran2);
+
+        // Zlý mág (finální protivník) v Mágově skrýši
+        NPC zlyMag = new NPC("Zlý mág", "Vysoký muž v tmavém plášti s kapucí a zlověstným pohledem.") {
+            @Override
+            public void zahajDialog() {
+                System.out.println("*Temným hlasem* Tak ty ses odvážil přijít až sem, malý učni? Knihu ti nedám!");
+            }
+
+            @Override
+            public void dejNapovedu() {
+                System.out.println("Mág se ušklíbne: \"Knihu jsem ukryl dobře. Jen já vím, jak prolomit její ochranu.\"");
+            }
+        };
+        zlyMag.pridejDialog("Ta kniha je příliš mocná pro takovou knihovnu. Její moc náleží mně!");
+        zlyMag.pridejDialog("Myslíš, že mě můžeš zastavit? Jsi jen slabý učeň!");
+
+        npcVMistnostech.get("MAGOVA_SKRYS").add(zlyMag);
     }
+
+
+
+
 
     public void spustenHry() {
         System.out.println("Vítej ve hře Záchrana Ztracené Knihovny!");
@@ -131,6 +266,9 @@ public class Hra {
         konecHry = true;
     }
 
+
+
+
     public void vyhodnotHru() {
         if (knihaNalezena && svet.getAktualniMistnost().getNazev().equals("HLAVNI_ARCHIV")) {
             System.out.println("Gratulujeme! Vrátil(a) jsi Knihu Prvního Kouzla na její místo.");
@@ -143,6 +281,9 @@ public class Hra {
             knihaNalezena = true;
         }
     }
+
+
+
 
     public void prozkoumejMistnost() {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
@@ -160,7 +301,6 @@ public class Hra {
             System.out.println("Nevidíš tu žádné předměty.");
         }
 
-        // Výpis NPC v místnosti
         List<NPC> postavy = npcVMistnostech.get(aktualniMistnost.getNazev());
         if (postavy != null && !postavy.isEmpty()) {
             System.out.println("Jsou zde tyto postavy:");
@@ -172,11 +312,12 @@ public class Hra {
         }
     }
 
+
     public void prozkoumejPredmet(String nazevPredmetu) {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
         List<Predmet> predmety = predmetyVMistnostech.get(aktualniMistnost.getNazev());
 
-        // Nejprve zkontrolujeme předměty v místnosti
+
         if (predmety != null) {
             for (Predmet predmet : predmety) {
                 if (predmet.getNazev().equalsIgnoreCase(nazevPredmetu)) {
@@ -185,8 +326,6 @@ public class Hra {
                 }
             }
         }
-
-        // Poté zkontrolujeme předměty v inventáři
         prenosnyPredmet predmetVInventari = inventar.najdiPredmet(nazevPredmetu);
         if (predmetVInventari != null) {
             System.out.println(predmetVInventari.getPopis());
@@ -195,6 +334,8 @@ public class Hra {
 
         System.out.println("Takový předmět tu není nebo ho nemáš v inventáři.");
     }
+
+
 
     public Predmet najdiPredmetVMistnosti(String nazevPredmetu) {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
@@ -211,6 +352,7 @@ public class Hra {
         return null;
     }
 
+
     public void odstranPredmetZMistnosti(String nazevPredmetu) {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
         List<Predmet> predmety = predmetyVMistnostech.get(aktualniMistnost.getNazev());
@@ -219,6 +361,8 @@ public class Hra {
             predmety.removeIf(predmet -> predmet.getNazev().equalsIgnoreCase(nazevPredmetu));
         }
     }
+
+
 
     public void pridejPredmetDoMistnosti(prenosnyPredmet predmet) {
         Mistnost aktualniMistnost = svet.getAktualniMistnost();
@@ -240,9 +384,9 @@ public class Hra {
                 }
             }
         }
-
         return null;
     }
+
 
     // Gettery
     public SeznamPrikazu getSeznamPrikazu() {
